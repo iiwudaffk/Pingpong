@@ -37,9 +37,10 @@ int findBiggestContour(vector<vector<cv::Point>> &contours)
 	return index;
 }
 
-float findHueInArea(cv::Mat &input, cv::Point input_point, int radius)
+float findHueInArea(cv::Mat &input, cv::Mat &output, cv::Point input_point, int radius)
 {
-	cv::Rect roi_rect = cv::Rect((input_point.x-radius,input_point.x+radius), (input_point.y-radius,input_point.y+radius), radius, radius);
+	cv::Rect roi_rect = cv::Rect(input_point.x-radius/2, input_point.y-radius/2, radius, radius);
+	cv::rectangle(output,roi_rect,cv::Scalar(255, 50, 10), 5);
 	cv::Mat temp = input(roi_rect);
 	std::vector<cv::Mat> imgHSV;
 	cv::split(temp, imgHSV);
@@ -51,9 +52,10 @@ float findHueInArea(cv::Mat &input, cv::Point input_point, int radius)
 
 
 
-Ball::Ball()
+Ball::Ball(int screenWidth,int screenHeight)
 {
-	location = cv::Point(320,240);
+	screenCenter = cv::Point(screenWidth/2,screenHeight/2);
+	location = screenCenter;
 	angle = 0.0;
 	mode = 0;
 	movex = 1;
@@ -93,8 +95,8 @@ float Ball::getSpeed()
 
 void Ball::setLocation()
 {
-	location.x = 320;
-	location.y = 240;
+	location.x = screenCenter.x;
+	location.y = screenCenter.y;
 }
 
 void Ball::setLocation(float x,float y)
@@ -145,7 +147,7 @@ void Ball::drawBall(cv::Mat drawOutput)
 
 void Ball::refreshBall()
 {
-	location = cv::Point(320,240);
+	location = cv::Point(screenCenter.x,screenCenter.y);
 	angle = 0.0;
 	mode = 0;
 	movex = 1;
@@ -247,11 +249,36 @@ void Player::calSpeed()
 	}
 }
 
-void Player::drawPlayer(cv::Mat drawOutput,int colorB,int colorG,int colorR)
+void Player::drawPlayer(cv::Mat &drawOutput,int colorB,int colorG,int colorR)
 {
-	cv::rectangle(drawOutput, cv::Point(location.x-60,location.y-60), cv::Point(location.x+60,location.y+60), cv::Scalar(colorB, colorG, colorR), 5);
+	cv::rectangle(drawOutput, cv::Point(location.x-80,location.y-80), cv::Point(location.x+80,location.y+80), cv::Scalar(colorB, colorG, colorR), 5);
 }
 
+
+cv::Mat normalizeColor(cv::Mat &input)
+{
+	cv::Mat output = input;
+	int c = input.cols*output.channels();
+	int r = input.rows;
+
+	for(int i =0; i < c; i=i+3) // colums
+	{
+		for(int j=0; j< r;j++) // rows
+		{
+			uchar* data= input.ptr<uchar>(j);
+			uchar* data2= output.ptr<uchar>(j);
+
+			float sum = data[i]+data[i+1]+data[i+2];
+
+			if(sum==0.0){sum=0.1;}
+
+			data2[i] = data[i]/sum*255;
+			data2[i+1] = data[i+1]/sum*255;
+			data2[i+2] = data[i+2]/sum*255;
+		}
+	}
+	return output;
+}
 
 
 
@@ -371,7 +398,7 @@ PointHue getPlayerLocation(cv::Mat &input,int hmin,int smin,int vmin,int hmax,in
 	}
 
 	/// Get the moments
-	int min_area = 0;
+	int min_area = 400;
 	float compactness;
 	//int index = 0;
 	float closest = 8;

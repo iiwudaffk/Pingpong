@@ -29,6 +29,7 @@ class Ball
 {
 private:
 	cv::Point location;
+	cv::Point screenCenter;
 	float angle;
 	int mode;// 0=stop, 1=move
 	int movex;// 0= --, 1= ++
@@ -56,7 +57,7 @@ public:
 	void refreshBall();
 
 	// default constructor
-	Ball();
+	Ball(int screenWidth,int screenHeight);
 };
 
 class Player
@@ -73,7 +74,7 @@ public:
 	void setLocation(cv::Point);
 	void updateLast5();
 	void calSpeed();
-	void drawPlayer(cv::Mat,int,int,int);
+	void drawPlayer(cv::Mat&,int,int,int);
 	
 	// default constructor
 	Player(cv::Point pos);
@@ -89,7 +90,7 @@ int findBiggestContour(vector<vector<cv::Point>> &contours);
 
 // calculate Hue color value in some area
 // @return hue(float) (min=0,max=180)
-float findHueInArea(cv::Mat &input, cv::Point input_point, int radius);
+float findHueInArea(cv::Mat &input, cv::Mat &output,cv::Point input_point, int radius);
 
 // threshold image in HSV range
 // @return image as threshold(cv::Mat)
@@ -98,3 +99,8 @@ cv::Mat getFrameColor(cv::Mat &input,int hmin,int smin,int vmin,int hmax,int sma
 // find centroid of biggest contour in HSV range
 // @return centroid of biggest contour(cv::Point)
 PointHue getPlayerLocation(cv::Mat &input,int hmin,int smin,int vmin,int hmax,int smax,int vmax);
+
+
+// nomalize color BGR
+// @return image 3 channels(cv::Mat)
+cv::Mat normalizeColor(cv::Mat &input);
