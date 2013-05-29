@@ -29,21 +29,21 @@ Winmm.lib
 
 ============
 
-### Change Log ###
+# Change Log #
 
-# v1.0 [2013.05.28]
+### v1.0 [2013.05.28]
 - fix bug when get winner, show text
 - fix other bug
 
 
-# v1.01beta2 [2013.05.22]
+### v1.01beta2 [2013.05.22]
 [for anniversary of 20th years faculty of Engineering NU]
 - normalize color before detect color processing = detecting color better
 - use smaller image to processing = faster performance
 - can select display screen resolution [support 640x480, 800,600, 1024x768, 1366x768, 1280x1024, 1920x1080]
 
 
-# v1.0beta [2013.03]
+### v1.0beta [2013.03]
 [for present subject project]
 - detect blue and pink
 - add ball speed function
