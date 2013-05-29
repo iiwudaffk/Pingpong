@@ -32,8 +32,8 @@ Winmm.lib
 # Change Log #
 
 ### v1.0 [2013.05.28]
-- fix bug when get winner, show text
-- fix other bug
+- fixed bug when get winner, show text
+- fixed other bug
 
 
 ### v1.01beta2 [2013.05.22]
@@ -46,4 +46,4 @@ Winmm.lib
 ### v1.0beta [2013.03]
 [for present subject project]
 - detect blue and pink
-- add ball speed function
+- added ball speed function
