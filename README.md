@@ -10,10 +10,22 @@ use opencv detect biggest color contour then apply to pingpong game
 - add library path
 
 ### Debug Input Library ###
-opencv_core243d.lib;opencv_highgui243d.lib;opencv_imgproc243d.lib;opencv_features2d243d.lib;opencv_calib3d243d.lib;opencv_ml243d.lib;Winmm.lib
+opencv_core243d.lib;
+opencv_highgui243d.lib;
+opencv_imgproc243d.lib;
+opencv_features2d243d.lib;
+opencv_calib3d243d.lib;
+opencv_ml243d.lib;
+Winmm.lib
 
 ### Release Input Library ###
-opencv_core243.lib;opencv_highgui243.lib;opencv_imgproc243.lib;opencv_features2d243.lib;opencv_calib3d243.lib;opencv_ml243.lib;Winmm.lib
+opencv_core243.lib;
+opencv_highgui243.lib;
+opencv_imgproc243.lib;
+opencv_features2d243.lib;
+opencv_calib3d243.lib;
+opencv_ml243.lib;
+Winmm.lib
 
 ============
 
