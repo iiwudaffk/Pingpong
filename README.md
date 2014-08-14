@@ -3,6 +3,11 @@ Pingpong
 
 use opencv detect biggest color contour then apply to pingpong game
 
+### download ###
+setup_pingpong_1_0.exe 4.4 MB
+https://mega.co.nz/#!6k4XzCCS!SLTF-X-LIEg2sbXtrmkJOWrsNHs8CW5hdZJnytnWd70
+
+
 
 ##############################
 ### How to setup ###
